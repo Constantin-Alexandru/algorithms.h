@@ -189,14 +189,53 @@ namespace algorithms{
     template<typename T, class Compare>
     void selection_sort(T* arr, std::size_t size, Compare comp)
     {
-        for(std::size_t i = 0; i < size - 1; i++){
-            std::size_t imin = i;
-            for(std::size_t j = i + 1; j < size; j++){
-                if(comp(arr[imin], arr[j])){
-                    imin = j;
+
+    for(std::size_t i = 0; i < size - 1; i++){
+        std::size_t imin = i;
+        for(std::size_t j = i + 1; j < size; j++){
+            if(comp(arr[imin], arr[j])){
+                imin = j;
                 }
             }
             std::swap(arr[i], arr[imin]);
         }
+    }
+
+    /*
+
+        This section will contain different searching methods
+
+    */
+
+    template<typename T>
+    int search(T* arr, long long int size, T elem)
+    {
+        for(long long int i = 0; i < size; i++){
+            if(arr[i] == elem)
+                return i;
+        }
+
+
+        return -1;
+    }
+
+    template<typename T>
+    int binary_search(T* arr, long long int size, T elem)
+    {
+        long long int start, end, mid;
+
+        start = 0;
+        end = size - 1;
+
+        while(start <= end){
+            mid = (start + end) / 2;
+
+            if(elem == arr[mid])
+                return mid;
+            else if(elem < arr[mid]) end = mid - 1;
+            else start = mid + 1;
+        }
+
+        return -1;
     }
 }
